@@ -1,5 +1,5 @@
 // This script requires that you activate the Admin SDK service.
-// This script also assumes that you have the onboarding docuemnt in your drive already. It will fail to fire if it cannot locate the document.
+// This script also assumes that you have the onboarding document in your drive already. It will fail to fire if it cannot locate the document.
 // I recommend that you set triggers to send weekly, ideally just before your users arrive for the start of their work week.
 
 // Set this equal to your Workspace root domain. For Example: 'example.org'

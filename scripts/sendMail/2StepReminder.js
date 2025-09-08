@@ -14,6 +14,15 @@ const subject = "2 Step Verification Reminder"
 const body = "This is an automated email reminding you to take a few minutes to set up 2 Step Verification on your account. For the safety and security of the organization, your account will only have limited access to domain resources, and after a while completely locked out of services like Drive and Docs if you don't set up 2 Step Verification. \n\rPlease follow the steps in the attached document to get this set up and gain access to all of the available features of the Google Workspace domain.\n\rYour account will become unrestricted the day after you have set up 2SV. \r\n\r\nIf for any reason, you still do not have access to certain features after that time should have passed, please let us know by submitting a helpdesk ticket."
 const attachment = (DriveApp.getFilesByName(documentName)).next().getAs("application/pdf")
 
+//This function will create the recommended trigger scheme for you. If you would like to use an alternate trigger scheme, you can edit the init function or create your trigger manually.
+function init() {
+  ScriptApp.newTrigger('send2SVReminderEmail')
+  .timeBased()
+  .onWeekDay(ScriptApp.WeekDay.MONDAY)
+  .atHour(6)
+  .create();
+}
+
 function send2SVReminderEmail() {
   // API query limit is 500 users so we need to do multiple queries to get all users. 
   // TODO: Maybe only get users in selected OUs to reduce API call overhead for large sites

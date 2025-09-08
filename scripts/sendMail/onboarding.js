@@ -17,6 +17,15 @@ const subject = "Welcome to Your New Account!"
 const body = "We are so glad to have you join our team! \n\rThere is something we need you to take care of real quick for us. For the safety and security of the organization, your account will only have limited access to domain resources, and after a while completely locked out of applications like Drive and Docs if you don't set up 2 Step Verification. \n\rPlease follow the steps in the attached document to get this set up and gain access to all of the available features of the Google Workspace domain!\n\rIf you happened to set up 2 Step Verification from a pop up that displayed when you first logged in, you can safely ignore this email. \r\nYour account will become unrestricted the day after you have set up 2SV. \r\n\r\nIf for any reason, you still do not have access to certain features after that time should have passed, please let us know by submitting a helpdesk ticket."
 const attachment = (DriveApp.getFilesByName(documentName)).next().getAs("application/pdf")
 
+//This function will create the recommended trigger scheme for you. If you would like to use an alternate trigger scheme, you can edit the init function or create your trigger manually.
+function init() {
+  ScriptApp.newTrigger('sendOnboardingMail')
+  .timeBased()
+  .everyDays(1)
+  .atHour(6)
+  .create();
+}
+
 function sendOnboardingMail(){
   // API query limit is 500 users so we need to do multiple queries to get all users. 
   // TODO: Maybe only get users in selected OUs to reduce API call overhead for large sites
